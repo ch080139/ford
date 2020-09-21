@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<launch>
+	<!--GPS-->
+	<node name="nuogeng_node" pkg="nuogeng" type="nuogeng_node" output="screen">
+		<param name="port_name" value="/dev/ttyUSB0"/>
+		<param name="gpsUtm_topic" value="/gpsUtm"/>
+	</node>
+	<!--GPS 记录-->
+	<node name="record_path_node" pkg="nuogeng" type="record_path_node" output= "screen">
+		<param name="file_path" value="$(find nuogeng)/data/"/>
+		<param name="file_name" value="path.txt"/>
+		<param name="sample_distance" value="0.1" />
+		<param name="gpsUtm_topic" value="/gpsUtm" />
+	</node>
+	
+	<!--obu-->
+	<node name="obu_node" pkg="v2x" type="obu_node.py" output= "screen">
+	</node>
+<!--	obu 记录-->
+	<node name="obu_record" pkg="v2x" type="obu_record.py" output="screen">
+		<param name="file_path" value="$(find v2x)/data/"/>
+		<param name="file_name" value="spat.csv"/>
+	</node>
+	
+	<!-- 传感器静态坐标变换                                                   x y z yaw pitch roll-->
+<!--	<node pkg="tf" type="static_transform_publisher" name="mm_radar_tf" args="0 3 0 0 0 0 base_link esr_radar 100" />-->
+	
+	<!--can分析仪-->
+	<node name="usbcan_driver_node" pkg="usbcan_driver" type="usbcan_driver_node" output="screen">
+		<rosparam param="baudrate" > [500,500] </rosparam>
+		<rosparam param="frame_id" > ["r","w"] </rosparam> <!--通道1读取，通道2发送-->
+		<!--配置滤波器 通道1全部接收; 通道2全不接收-->
+		<rosparam param="acc_code" >  [0xFFFFFFF,0x0] </rosparam>
+		<rosparam param="mask_code" > [0xFFFFFFF,0x0] </rosparam>
+		<param name ="from_can_topic"  type ="string"  value="/esr_radar/from_can_topic"/>
+		<param name ="to_can_topic"    type ="string"  value="/esr_radar/to_can_topic"/>
+	</node>
+	
+	<!--毫米波雷达-->
+	<node name="esr_radar_node" pkg="esr_radar" type ="esr_radar_node" output="screen">
+		<param name ="is_sendMsgToEsr" type ="bool"  value="True"/>
+		<param name ="install_height"  type ="int"  value="2"/> <!--cm-->
+		<param name ="install_angle"   type ="double" value="-1.4"/> <!--deg-->
+		<param name ="from_can_topic"  type ="string"  value="/esr_radar/from_can_topic"/>
+		<param name ="to_can_topic"    type ="string"  value="/esr_radar/to_can_topic"/>
+		
+	</node>
+	
+	<!--同步记录-->
+	<node name="msgs_record_node" pkg="msgs_record" type="msgs_record_node" output= "screen">
+		<param name="file_path" value="$(find msgs_record)/data/"/>
+		<param name="file_name" value="gps_obu_esr.csv"/>
+		<param name ="glosa_topic"  type ="string"  value="/glosa"/>
+
+	</node> 
+	<!--GLOSA-->
+	<node name="glosa_node" pkg="glosa" type="glosa_node" output= "screen">
+		<!--配置虚拟的信号位置-->
+		<param name ="interUtmx"  type ="double"  value="671693.644152"/>
+		<param name ="interUtmy"  type ="double"  value="3529064.928424"/>
+		<param name ="useVirtualPos"  type ="bool"  value="True"/>
+		<param name ="glosa_topic"  type ="string"  value="/glosa"/>
+		<param name ="gui_topic"  type ="string"  value="/gui"/>
+	</node> 
+	
+	<node name="qt_gui_node" pkg="test_run1" type="main.py" output="screen"/>
+
+</launch>
+
+
+
+
+
+
+
+
+
+
+
+
+

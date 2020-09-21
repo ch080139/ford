@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<launch>
+	<!--GLOSA-->
+	<node name="glosa_node" pkg="glosa" type="glosa_node" output= "screen">
+		<!--配置虚拟的信号位置-->
+		<param name ="interUtmx"  type ="double"  value="671693.644152"/>
+		<param name ="interUtmy"  type ="double"  value="3529064.928424"/>
+		<param name ="useVirtualPos"  type ="bool"  value="True"/>
+		<param name ="glosa_topic"  type ="string"  value="/glosa"/>
+		<param name ="gui_topic"  type ="string"  value="/gui"/>
+		<param name="file_path" value="$(find glosa)/data/"/>
+		<param name="file_name" value="glosa.txt"/>
+	</node> 
+
+</launch>
+
+
+
+
+
+
+
+
+
+
+
+
+

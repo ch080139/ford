@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+	<node name="msgs_record_node" pkg="msgs_record" type="msgs_record_node" output= "screen">
+		<param name="file_path" value="$(find msgs_record)/data/"/>
+		<param name="file_name" value="gps_obu_esr.csv"/>
+		<param name ="glosa_topic"  type ="string"  value="/glosa"/>
+	</node> 
+	
+</launch>

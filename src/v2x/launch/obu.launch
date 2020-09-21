@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+	<node name="obu_node" pkg="v2x" type="obu_node.py" output= "screen">
+	</node>
+	
+	<node name="obu_record" pkg="v2x" type="obu_record.py" output="screen">
+		<param name="file_path" value="$(find v2x)/data/"/>
+		<param name="file_name" value="spat.csv"/>
+	</node>
+
+</launch>
+
+
+
+

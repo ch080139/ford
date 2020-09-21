@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<node name="msgs_record_node" pkg="msgs_record" type="msgs_record_node" output= "screen">
+		<param name="file_path" value="$(find msgs_record)/data/"/>
+		<param name="file_name" value="gps_obu_esr.csv"/>
+		<param name ="glosa_topic"  type ="string"  value="/glosa"/>
+	</node> 
+
+	<!--GLOSA-->
+<!--	<node name="glosa_node" pkg="glosa" type="glosa_node" output= "screen">-->
+<!--		<!--配置虚拟的信号位置-->-->
+<!--		<param name ="interUtmx"  type ="double"  value="671693.644152"/>-->
+<!--		<param name ="interUtmy"  type ="double"  value="3529064.928424"/>-->
+<!--		<param name ="useVirtualPos"  type ="bool"  value="True"/>-->
+<!--		<param name ="glosa_topic"  type ="string"  value="/glosa"/>-->
+<!--		<param name ="gui_topic"  type ="string"  value="/gui"/>-->
+<!--	</node> -->
+	
+<!--	<node name="qt_gui" pkg="test_run1" type="main.py" output="screen"/>-->
+
+</launch>

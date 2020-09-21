@@ -1,0 +1,8 @@
+prefix=/home/chenhao/catkin_ws/install
+
+Name: usbcan_driver
+Description: Description of usbcan_driver
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

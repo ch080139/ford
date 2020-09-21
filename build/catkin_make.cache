@@ -1,0 +1,2 @@
+can_msgs:esr_radar:glosa:gps_msgs:gui:msgs_record:nuogeng:usbcan_driver:v2x
+-DCATKIN_DEVEL_PREFIX=/home/chenhao/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/chenhao/catkin_ws/install -G Unix Makefiles
